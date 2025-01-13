@@ -235,6 +235,7 @@ class Config(dict):
         'SESSION_COOKIE_NAME_PREFIX': None,
         'SESSION_COOKIE_AGE': 3600 * 24,
         'SESSION_EXPIRE_AT_BROWSER_CLOSE': False,
+        'VIEW_ASSET_ONLINE_SESSION_INFO': True,
         'LOGIN_URL': reverse_lazy('authentication:login'),
 
         'CONNECTION_TOKEN_ONETIME_EXPIRATION': 5 * 60,  # 默认(new)
@@ -258,9 +259,20 @@ class Config(dict):
 
         # Vault
         'VAULT_ENABLED': False,
+        'VAULT_BACKEND': 'local',
+
         'VAULT_HCP_HOST': '',
         'VAULT_HCP_TOKEN': '',
         'VAULT_HCP_MOUNT_POINT': 'jumpserver',
+
+        'VAULT_AZURE_HOST': '',
+        'VAULT_AZURE_CLIENT_ID': '',
+        'VAULT_AZURE_CLIENT_SECRET': '',
+        'VAULT_AZURE_TENANT_ID': '',
+
+        'VAULT_AWS_REGION_NAME': '',
+        'VAULT_AWS_ACCESS_KEY_ID': '',
+        'VAULT_AWS_ACCESS_SECRET_KEY': '',
 
         'HISTORY_ACCOUNT_CLEAN_LIMIT': 999,
 
@@ -278,7 +290,7 @@ class Config(dict):
         'AUTH_LDAP_START_TLS': False,
         'AUTH_LDAP_USER_ATTR_MAP': {"username": "cn", "name": "sn", "email": "mail"},
         'AUTH_LDAP_CONNECT_TIMEOUT': 10,
-        'AUTH_LDAP_CACHE_TIMEOUT': 3600 * 24 * 30,
+        'AUTH_LDAP_CACHE_TIMEOUT': 0,
         'AUTH_LDAP_SEARCH_PAGED_SIZE': 1000,
         'AUTH_LDAP_SYNC_IS_PERIODIC': False,
         'AUTH_LDAP_SYNC_INTERVAL': None,
@@ -298,7 +310,7 @@ class Config(dict):
         'AUTH_LDAP_HA_START_TLS': False,
         'AUTH_LDAP_HA_USER_ATTR_MAP': {"username": "cn", "name": "sn", "email": "mail"},
         'AUTH_LDAP_HA_CONNECT_TIMEOUT': 10,
-        'AUTH_LDAP_HA_CACHE_TIMEOUT': 3600 * 24 * 30,
+        'AUTH_LDAP_HA_CACHE_TIMEOUT': 0,
         'AUTH_LDAP_HA_SEARCH_PAGED_SIZE': 1000,
         'AUTH_LDAP_HA_SYNC_IS_PERIODIC': False,
         'AUTH_LDAP_HA_SYNC_INTERVAL': None,
@@ -480,6 +492,11 @@ class Config(dict):
         'LOGIN_REDIRECT_TO_BACKEND': '',  # 'OPENID / CAS / SAML2
         'LOGIN_REDIRECT_MSG_ENABLED': True,
 
+        # 人脸识别
+        'FACE_RECOGNITION_ENABLED': False,
+        'FACE_RECOGNITION_DISTANCE_THRESHOLD': 0.35,
+        'FACE_RECOGNITION_COSINE_THRESHOLD': 0.95,
+
         'SMS_ENABLED': False,
         'SMS_BACKEND': '',
         'SMS_CODE_LENGTH': 4,
@@ -659,7 +676,6 @@ class Config(dict):
 
         # API 分页
         'MAX_LIMIT_PER_PAGE': 10000,
-        'DEFAULT_PAGE_SIZE': None,
 
         'LIMIT_SUPER_PRIV': False,
 
